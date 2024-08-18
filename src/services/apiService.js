@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://intern-task-api.bravo68web.workers.dev";
 
-// request handler
+// Generic request handler
 const request = async (endpoint, method = "GET", body = null, headers = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -21,7 +21,6 @@ const request = async (endpoint, method = "GET", body = null, headers = {}) => {
 
     return response.json();
   } catch (error) {
-    // Handle newtork errors or JSON parsing errorss
     console.error("Request failed:", error);
     throw error;
   }
@@ -41,12 +40,20 @@ export const signUpUser = async (email, password) => {
   return request("/auth/signup", "POST", { email, password });
 };
 
-// Log in user
 export const loginUser = async (email, password) => {
-  const data = await request("/auth/login", "POST", { email, password });
-  localStorage.setItem("authToken", data.token);
+  try {
+    const data = await request("/auth/login", "POST", { email, password });
+    if (!data || !data.token) {
+      throw new Error("Token not found in the response");
+    }
+    localStorage.setItem("authToken", data.token);
+    return data;
+  } catch (error) {
+    return {};
+  }
 };
 
+// Fetch user information with authentication
 export const getUserInfo = async () => {
   const token = localStorage.getItem("authToken");
   if (!token) throw new Error("No authentication token found");

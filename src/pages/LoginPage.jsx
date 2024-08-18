@@ -11,6 +11,9 @@ const LoginPage = ({ onLogin }) => {
     e.preventDefault();
     try {
       const { token } = await loginUser(email, password);
+      if (!token) {
+        throw new Error("Login failed: Token is undefined");
+      }
       localStorage.setItem("token", token);
       onLogin(email);
       navigate("/");

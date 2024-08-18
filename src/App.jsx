@@ -25,7 +25,7 @@ const App = () => {
           setUser(userInfo.email);
         } catch (error) {
           console.error("Failed to fetch user info:", error);
-          localStorage.removeItem("token"); // Clear token on failure
+          localStorage.removeItem("token");
           setUser(null);
         }
       }

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUser } from "react-icons/fa"; // Import the user icon
+import { FaUser } from "react-icons/fa";
 
 const Header = ({ userEmail }) => (
   <header className="bg-gradient-to-r from-blue-500 to-teal-500 text-white p-3 shadow-lg fixed top-0 left-0 w-full z-20">

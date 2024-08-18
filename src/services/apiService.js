@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://intern-task-api.bravo68web.workers.dev";
 
-// Generic request handler
+// request handler
 const request = async (endpoint, method = "GET", body = null, headers = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -21,15 +21,15 @@ const request = async (endpoint, method = "GET", body = null, headers = {}) => {
 
     return response.json();
   } catch (error) {
-    // Handle network errors or JSON parsing errors
+    // Handle newtork errors or JSON parsing errorss
     console.error("Request failed:", error);
-    throw error; // Re-throw the error after logging it
+    throw error;
   }
 };
 
 // Fetch products with authentication
 export const fetchProducts = async () => {
-  const token = localStorage.getItem("authToken"); // Retrieve token from local storage
+  const token = localStorage.getItem("authToken");
   if (!token) throw new Error("No authentication token found");
   return request("/api/products", "GET", null, {
     Authorization: `Bearer ${token}`,
@@ -44,18 +44,11 @@ export const signUpUser = async (email, password) => {
 // Log in user
 export const loginUser = async (email, password) => {
   const data = await request("/auth/login", "POST", { email, password });
-  localStorage.setItem("authToken", data.token); // Store token in local storage after login
-  return data;
+  localStorage.setItem("authToken", data.token);
 };
 
-// Get user information
 export const getUserInfo = async () => {
-  const token = localStorage.getItem("authToken"); // Retrieve token from local storage
+  const token = localStorage.getItem("authToken");
   if (!token) throw new Error("No authentication token found");
   return request("/api/me", "GET", null, { Authorization: `Bearer ${token}` });
-};
-
-// Fetch quotes
-export const fetchQuotes = async () => {
-  return request("/api/quote", "GET");
 };

@@ -12,8 +12,8 @@ setup.
 To get started, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/engineer-cradle-assignment.git
-cd engineer-cradle-assignment
+git clone https://github.com/cod3-assassin/engineers-cradle-assignment.git
+cd engineers-cradle-assignment
 Install Dependencies
 Install the necessary dependencies using npm:
 

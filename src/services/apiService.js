@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://intern-task-api.bravo68web.workers.dev";
 
-// Generic request handler
+// request handler
 const request = async (endpoint, method = "GET", body = null, headers = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
